@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Dr. Khushboo Singh - General Physician | Book Appointment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f7fe;
+            color: #1a1a2e;
+            line-height: 1.6;
+        }
+        
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .animate-fade {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+        
+        .animate-fade:nth-child(1) { animation-delay: 0.1s; }
+        .animate-fade:nth-child(2) { animation-delay: 0.2s; }
+        .animate-fade:nth-child(3) { animation-delay: 0.3s; }
+        .animate-fade:nth-child(4) { animation-delay: 0.4s; }
+        .animate-fade:nth-child(5) { animation-delay: 0.5s; }
+        
+        /* ===== HEADER ===== */
+        .header {
+            background: #ffffff;
+            padding: 12px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+            border-bottom: 2px solid #eef2ff;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        
+        .header-logo {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: white;
+            font-weight: 800;
+            box-shadow: 0 4px 15px rgba(79,70,229,0.3);
+        }
+        
+        .header-title h1 {
+            font-size: 18px;
+            font-weight: 800;
+            color: #1e1b4b;
+            line-height: 1.2;
+        }
+        
+        .header-title p {
+            font-size: 11px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .header-btn {
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .header-btn-outline {
+            background: transparent;
+            color: #4f46e5;
+            border: 2px solid #eef2ff;
+        }
+        
+        .header-btn-outline:hover {
+            background: #eef2ff;
+            transform: translateY(-2px);
+        }
+        
+        .header-btn-primary {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            box-shadow: 0 4px 15px rgba(79,70,229,0.3);
+        }
+        
+        .header-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79,70,229,0.4);
+        }
+        
+        .header-btn-call {
+            background: #10b981;
+            color: white;
+        }
+        
+        .header-btn-call:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+        
+        /* ===== HERO + BOOKING SECTION (Combined) ===== */
+        .hero-booking-section {
+            max-width: 1200px;
+            margin: 30px auto 20px;
+            padding: 0 20px;
+        }
+        
+        .hero-booking-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 30px;
+            background: linear-gradient(135deg, #1e1b4b, #312e81);
+            border-radius: 24px;
+            padding: 40px;
+            color: white;
+            box-shadow: 0 20px 60px rgba(30,27,75,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-booking-grid::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+            transform: rotate(-15deg);
+        }
+        
+        .hero-left {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-left .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #c7d2fe;
+            border: 1px solid rgba(255,255,255,0.06);
+            margin-bottom: 12px;
+        }
+        
+        .hero-left h2 {
+            font-size: 34px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+        
+        .hero-left h2 span {
+            background: linear-gradient(135deg, #fcd34d, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-left p {
+            font-size: 15px;
+            color: #c7d2fe;
+            max-width: 90%;
+            margin-bottom: 12px;
+        }
+        
+        .hero-rating {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        
+        .hero-rating .stars {
+            color: #f59e0b;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+        
+        .hero-rating .rating-text {
+            font-size: 13px;
+            color: #c7d2fe;
+        }
+        
+        .hero-rating .verified-badge {
+            background: #10b981;
+            color: white;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        
+        .hero-stats .stat {
+            background: rgba(255,255,255,0.06);
+            padding: 8px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        
+        .hero-stats .stat .number {
+            font-size: 18px;
+            font-weight: 800;
+            color: white;
+        }
+        
+        .hero-stats .stat .label {
+            font-size: 11px;
+            color: #9ca3af;
+            display: block;
+        }
+        
+        /* ===== BOOKING FORM (Right Side) ===== */
+        .booking-right {
+            background: white;
+            border-radius: 20px;
+            padding: 28px 24px;
+            color: #1a1a2e;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+        
+        .booking-right h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e1b4b;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .booking-right .subtitle {
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 16px;
+        }
+        
+        .booking-right .form-group {
+            margin-bottom: 12px;
+        }
+        
+        .booking-right .form-group label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #4b5563;
+            display: block;
+            margin-bottom: 3px;
+        }
+        
+        .booking-right .form-group input,
+        .booking-right .form-group select,
+        .booking-right .form-group textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            transition: 0.3s;
+            background: #fafbfc;
+        }
+        
+        .booking-right .form-group input:focus,
+        .booking-right .form-group select:focus,
+        .booking-right .form-group textarea:focus {
+            border-color: #4f46e5;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(79,70,229,0.08);
+            background: white;
+        }
+        
+        .booking-right .form-group textarea {
+            height: 60px;
+            resize: vertical;
+        }
+        
+        .booking-right .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .booking-right .book-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 4px;
+        }
+        
+        .booking-right .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79,70,229,0.35);
+        }
+        
+        .booking-right .quick-contact {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .booking-right .quick-contact a {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.3s;
+        }
+        
+        .booking-right .quick-contact .call-link {
+            background: #10b981;
+            color: white;
+        }
+        
+        .booking-right .quick-contact .call-link:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+        
+        .booking-right .quick-contact .whatsapp-link {
+            background: #25D366;
+            color: white;
+        }
+        
+        .booking-right .quick-contact .whatsapp-link:hover {
+            background: #1ebe5c;
+            transform: translateY(-2px);
+        }
+        
+        .booking-right .quick-contact .location-link {
+            background: #eef2ff;
+            color: #4f46e5;
+        }
+        
+        .booking-right .quick-contact .location-link:hover {
+            background: #dbeafe;
+            transform: translateY(-2px);
+        }
+        
+        /* ===== SERVICES SECTION ===== */
+        .services-section {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .section-header h2 {
+            font-size: 26px;
+            font-weight: 800;
+            color: #1e1b4b;
+        }
+        
+        .section-header h2 span {
+            color: #4f46e5;
+        }
+        
+        .section-header p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 16px;
+            padding: 18px 14px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid #f0f0f0;
+            transition: 0.3s;
+            cursor: default;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            border-color: #4f46e5;
+        }
+        
+        .service-card .icon {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 6px;
+        }
+        
+        .service-card h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e1b4b;
+        }
+        
+        .service-card p {
+            font-size: 10px;
+            color: #9ca3af;
+            margin-top: 2px;
+        }
+        
+        /* ===== REVIEWS ===== */
+        .reviews-section {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+        
+        .review-card {
+            background: white;
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .review-card .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+        
+        .review-card .review-name {
+            font-weight: 600;
+            font-size: 13px;
+            color: #1e1b4b;
+        }
+        
+        .review-card .review-stars {
+            color: #f59e0b;
+            font-size: 13px;
+        }
+        
+        .review-card .review-text {
+            font-size: 13px;
+            color: #4b5563;
+            font-style: italic;
+        }
+        
+        .review-card .review-date {
+            font-size: 10px;
+            color: #9ca3af;
+            margin-top: 6px;
+        }
+        
+        /* ===== LOCATION ===== */
+        .location-section {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .location-left h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1e1b4b;
+            margin-bottom: 8px;
+        }
+        
+        .location-left .address-box {
+            background: #f8fafc;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border-left: 4px solid #4f46e5;
+            margin: 10px 0;
+        }
+        
+        .location-left .address-box p {
+            font-size: 14px;
+            color: #1e293b;
+        }
+        
+        .location-left .timings {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin: 10px 0;
+        }
+        
+        .location-left .timings .time {
+            background: #f8fafc;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+        
+        .location-left .timings .time strong {
+            color: #1e1b4b;
+            display: block;
+        }
+        
+        .location-right iframe {
+            width: 100%;
+            height: 250px;
+            border-radius: 16px;
+            border: none;
+        }
+        
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #1e1b4b;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .footer .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 12px;
+        }
+        
+        .footer .social-icons a {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        
+        .footer .social-icons a:hover {
+            background: #4f46e5;
+            transform: translateY(-3px);
+        }
+        
+        .footer p {
+            font-size: 13px;
+            color: #9ca3af;
+        }
+        
+        /* ===== WHATSAPP FLOAT ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 999;
+            background: #25D366;
+            color: white;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+            text-decoration: none;
+            transition: 0.3s;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(37,211,102,0.45);
+        }
+        
+        .whatsapp-float .tooltip {
+            position: absolute;
+            right: 68px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: 0.3s;
+        }
+        
+        .whatsapp-float:hover .tooltip {
+            opacity: 1;
+        }
+        
+        /* ===== MOBILE RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .hero-booking-grid {
+                grid-template-columns: 1fr;
+                padding: 30px 24px;
+            }
+            
+            .hero-left h2 {
+                font-size: 28px;
+            }
+            
+            .hero-left p {
+                max-width: 100%;
+            }
+            
+            .location-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .booking-right .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 10px 16px;
+            }
+            
+            .header-title h1 {
+                font-size: 15px;
+            }
+            
+            .header-title p {
+                font-size: 10px;
+            }
+            
+            .header-btn {
+                font-size: 10px;
+                padding: 6px 12px;
+            }
+            
+            .hero-booking-section {
+                margin: 16px auto 10px;
+                padding: 0 12px;
+            }
+            
+            .hero-booking-grid {
+                padding: 24px 16px;
+                border-radius: 16px;
+            }
+            
+            .hero-left h2 {
+                font-size: 22px;
+            }
+            
+            .hero-left p {
+                font-size: 13px;
+            }
+            
+            .hero-stats {
+                gap: 10px;
+            }
+            
+            .hero-stats .stat {
+                padding: 6px 12px;
+            }
+            
+            .hero-stats .stat .number {
+                font-size: 15px;
+            }
+            
+            .booking-right {
+                padding: 20px 16px;
+            }
+            
+            .booking-right h3 {
+                font-size: 16px;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .service-card {
+                padding: 14px 10px;
+            }
+            
+            .service-card .icon {
+                font-size: 22px;
+            }
+            
+            .service-card h4 {
+                font-size: 12px;
+            }
+            
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .location-grid {
+                padding: 20px 16px;
+            }
+            
+            .location-left .timings {
+                grid-template-columns: 1fr;
+            }
+            
+            .whatsapp-float {
+                width: 48px;
+                height: 48px;
+                font-size: 22px;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .section-header h2 {
+                font-size: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-left {
+                gap: 10px;
+            }
+            
+            .header-logo {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+                border-radius: 10px;
+            }
+            
+            .header-title h1 {
+                font-size: 13px;
+            }
+            
+            .header-right {
+                gap: 6px;
+            }
+            
+            .header-btn {
+                font-size: 9px;
+                padding: 4px 10px;
+            }
+            
+            .hero-left h2 {
+                font-size: 18px;
+            }
+            
+            .hero-rating .stars {
+                font-size: 14px;
+            }
+            
+            .hero-rating .rating-text {
+                font-size: 11px;
+            }
+            
+            .hero-stats .stat .number {
+                font-size: 13px;
+            }
+            
+            .hero-stats .stat .label {
+                font-size: 9px;
+            }
+            
+            .booking-right .form-group input,
+            .booking-right .form-group select {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            
+            .service-card {
+                padding: 10px 8px;
+            }
+            
+            .service-card .icon {
+                font-size: 18px;
+            }
+            
+            .service-card h4 {
+                font-size: 10px;
+            }
+            
+            .service-card p {
+                font-size: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+    <div class="header-content">
+        <div class="header-left">
+            <div class="header-logo">🩺</div>
+            <div class="header-title">
+                <h1>Dr. Khushboo Singh</h1>
+                <p><i class="fas fa-stethoscope"></i> General Physician | Noida</p>
+            </div>
+        </div>
+        <div class="header-right">
+            <a href="tel:+919999999999" class="header-btn header-btn-call">
+                <i class="fas fa-phone"></i> Call Now
+            </a>
+            <a href="#booking" class="header-btn header-btn-primary">
+                <i class="fas fa-calendar-check"></i> Book Now
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- ===== HERO + BOOKING SECTION (Combined) ===== -->
+<section class="hero-booking-section" id="booking">
+    <div class="hero-booking-grid">
+        <!-- Left: Hero Content -->
+        <div class="hero-left animate-fade">
+            <div class="badge"><i class="fas fa-star"></i> Trusted Healthcare Provider</div>
+            <h2>Your Health, <span>Our Priority</span></h2>
+            <p>Expert care for Diabetes, Fever, Dengue, Thyroid & all general health concerns. Book your appointment online today.</p>
+            
+            <div class="hero-rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-text"><strong>4.9</strong> (298 Reviews)</span>
+                <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="number">10+</span>
+                    <span class="label">Years Experience</span>
+                </div>
+                <div class="stat">
+                    <span class="number">5000+</span>
+                    <span class="label">Happy Patients</span>
+                </div>
+                <div class="stat">
+                    <span class="number">4.9 ⭐</span>
+                    <span class="label">Patient Rating</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right: Booking Form -->
+        <div class="booking-right animate-fade">
+            <h3><i class="fas fa-calendar-check" style="color:#4f46e5;"></i> Book Appointment</h3>
+            <p class="subtitle">We'll confirm within 2 hours</p>
+            
+            <form id="bookingForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>👤 Full Name</label>
+                        <input type="text" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>📞 Phone</label>
+                        <input type="tel" placeholder="Mobile number" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>📧 Email</label>
+                    <input type="email" placeholder="Your email address">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>🩺 Service</label>
+                        <select required>
+                            <option value="">Select Service</option>
+                            <option value="diabetes">Diabetes Management</option>
+                            <option value="fever">Fever Treatment</option>
+                            <option value="dengue">Dengue Care</option>
+                            <option value="headache">Headache Management</option>
+                            <option value="thyroid">Thyroid Disorders</option>
+                            <option value="general">General Checkup</option>
+                            <option value="obesity">Obesity Management</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>📅 Date</label>
+                        <input type="date" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>📝 Symptoms / Details</label>
+                    <textarea placeholder="Briefly describe your symptoms..."></textarea>
+                </div>
+                
+                <button type="submit" class="book-btn">
+                    <i class="fas fa-calendar-check"></i> Book Appointment
+                </button>
+            </form>
+            
+            <div class="quick-contact">
+                <a href="tel:+919999999999" class="call-link"><i class="fas fa-phone"></i> Call</a>
+                <a href="https://wa.me/919999999999" class="whatsapp-link"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="#location" class="location-link"><i class="fas fa-map-marker-alt"></i> Location</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SERVICES SECTION ===== -->
+<section class="services-section" id="services">
+    <div class="section-header">
+        <h2>Our <span>Medical Services</span></h2>
+        <p>Comprehensive healthcare services tailored to your needs</p>
+    </div>
+    <div class="services-grid">
+        <div class="service-card animate-fade">
+            <span class="icon">🩸</span>
+            <h4>Diabetes Management</h4>
+            <p>Expert diagnosis & care</p>
+        </div>
+        <div class="service-card animate-fade">
+            <span class="icon">🌡️</span>
+            <h4>Fever Treatment</h4>
+            <p>Quick & effective relief</p>
+        </div>
+        <div class="service-card animate-fade">
+            <span class="icon">🦟</span>
+            <h4>Dengue Care</h4>
+            <p>Timely diagnosis & care</p>
+        </div>
+        <div class="service-card animate-fade">
+            <span class="icon">🧠</span>
+            <h4>Headache Management</h4>
+            <p>Migraine & tension relief</p>
+        </div>
+        <div class="service-card animate-fade">
+            <span class="icon">❤️</span>
+            <h4>Thyroid Disorders</h4>
+            <p>Expert thyroid care</p>
+        </div>
+        <div class="service-card animate-fade">
+            <span class="icon">🧬</span>
+            <h4>Metabolic Disorders</h4>
+            <p>Holistic health management</p>
+        </div>
+        <div class="service-card animate-fade">
+            <span class="icon">👵</span>
+            <h4>Geriatric Healthcare</h4>
+            <p>Compassionate elderly care</p>
+        </div>
+        <div class="service-card animate-fade">
+            <span class="icon">💊</span>
+            <h4>Obesity Management</h4>
+            <p>Personalized weight plans</p>
+        </div>
+        <div class="service-card animate-fade">
+            <span class="icon">🧪</span>
+            <h4>General Checkup</h4>
+            <p>Complete health assessment</p>
+        </div>
+        <div class="service-card animate-fade">
+            <span class="icon">🫀</span>
+            <h4>Heart Health</h4>
+            <p>Comprehensive cardiac care</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== REVIEWS SECTION ===== -->
+<section class="reviews-section" id="reviews">
+    <div class="section-header">
+        <h2>⭐ What Our <span>Patients Say</span></h2>
+        <p>Real reviews from our happy patients</p>
+    </div>
+    <div class="reviews-grid">
+        <div class="review-card animate-fade">
+            <div class="review-header">
+                <span class="review-name">👤 Rajesh Kumar</span>
+                <span class="review-stars">★★★★★</span>
+            </div>
+            <div class="review-text">"The doctor quickly diagnosed the issue and prescribed the right treatment. Very professional and caring."</div>
+            <div class="review-date">📅 15 Jan 2026</div>
+        </div>
+        <div class="review-card animate-fade">
+            <div class="review-header">
+                <span class="review-name">👤 Priya Sharma</span>
+                <span class="review-stars">★★★★★</span>
+            </div>
+            <div class="review-text">"Best doctor in Noida! She listened to all my concerns and explained everything clearly. Highly recommend."</div>
+            <div class="review-date">📅 12 Jan 2026</div>
+        </div>
+        <div class="review-card animate-fade">
+            <div class="review-header">
+                <span class="review-name">👤 Amit Verma</span>
+                <span class="review-stars">★★★★☆</span>
+            </div>
+            <div class="review-text">"Great doctor prescribed great medicine. My condition improved significantly after treatment."</div>
+            <div class="review-date">📅 10 Jan 2026</div>
+        </div>
+        <div class="review-card animate-fade">
+            <div class="review-header">
+                <span class="review-name">👤 Sneha Gupta</span>
+                <span class="review-stars">★★★★★</span>
+            </div>
+            <div class="review-text">"Excellent care! Dr. Khushboo Singh is very knowledgeable and compassionate. Definitely recommend."</div>
+            <div class="review-date">📅 08 Jan 2026</div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== LOCATION SECTION ===== -->
+<section class="location-section" id="location">
+    <div class="location-grid">
+        <div class="location-left">
+            <h2>📍 <span style="color:#4f46e5;">Visit Our Clinic</span></h2>
+            <div class="address-box">
+                <p><strong>🏥 Dr. Khushboo Singh Clinic</strong></p>
+                <p>BLK-37, Sector 116, Noida, Uttar Pradesh</p>
+                <p style="font-size:13px; color:#6b7280; margin-top:4px;">
+                    <i class="fas fa-phone"></i> +91 9999999999 &nbsp;|&nbsp;
+                    <i class="fas fa-envelope"></i> drkhushboo@clinic.com
+                </p>
+            </div>
+            
+            <h4 style="color:#1e1b4b; margin-top:12px; font-size:15px;">🕐 Clinic Timings</h4>
+            <div class="timings">
+                <div class="time"><strong>Mon - Fri</strong> 9:00 AM - 8:00 PM</div>
+                <div class="time"><strong>Saturday</strong> 9:00 AM - 5:00 PM</div>
+                <div class="time"><strong>Sunday</strong> 10:00 AM - 2:00 PM</div>
+                <div class="time"><strong>Emergency</strong> 📞 Call for urgent care</div>
+            </div>
+            
+            <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+                <a href="tel:+919999999999" style="background:#10b981; color:white; padding:10px 20px; border-radius:30px; text-decoration:none; font-weight:600; font-size:13px; display:inline-flex; align-items:center; gap:6px;">
+                    <i class="fas fa-phone"></i> Call Now
+                </a>
+                <a href="https://wa.me/919999999999" style="background:#25D366; color:white; padding:10px 20px; border-radius:30px; text-decoration:none; font-weight:600; font-size:13px; display:inline-flex; align-items:center; gap:6px;">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+        </div>
+        <div class="location-right">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28051.76823352868!2d77.325037!3d28.535517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce5d6f8b7a9b9%3A0x8e5f8c6d7b8a9c0!2sSector%20116%2C%20Noida%2C%20Uttar%20Pradesh%20201301!5e0!3m2!1sen!2sin!4v1700000000000" 
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+</section>
+
+<!-- ===== WHATSAPP FLOAT ===== -->
+<a href="https://wa.me/919999999999" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+    <span class="tooltip">Chat with us</span>
+</a>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p>
+            © 2026 Dr. Khushboo Singh | General Physician | Noida
+        </p>
+        <p style="font-size:12px; color:#6b7a9f; margin-top:4px;">
+            🏥 BLK-37, Sector 116, Noida | 📞 +91 9999999999
+        </p>
+        <p style="font-size:11px; color:#6b7a9f; margin-top:2px;">
+            ⚕️ Trusted Healthcare | Quality Care | Patient First
+        </p>
+    </div>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+    // Booking Form Submit
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form values
+        const name = this.querySelector('input[type="text"]').value;
+        const phone = this.querySelector('input[type="tel"]').value;
+        const email = this.querySelector('input[type="email"]').value;
+        const service = this.querySelector('select').value;
+        const date = this.querySelector('input[type="date"]').value;
+        const details = this.querySelector('textarea').value;
+        
+        // Show confirmation
+        alert('✅ Appointment Request Submitted!\n\n' +
+              '👤 Name: ' + name + '\n' +
+              '📞 Phone: ' + phone + '\n' +
+              '📧 Email: ' + (email || 'Not provided') + '\n' +
+              '🩺 Service: ' + service + '\n' +
+              '📅 Date: ' + date + '\n' +
+              '📝 Details: ' + (details || 'None') + '\n\n' +
+              'We will confirm your booking within 2 hours.\n' +
+              'Thank you for choosing Dr. Khushboo Singh! 🩺');
+        
+        this.reset();
+    });
+
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Phone Click Tracking
+    document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+        link.addEventListener('click', function() {
+            console.log('📞 Phone clicked:', this.getAttribute('href'));
+        });
+    });
+
+    // WhatsApp Click Tracking
+    document.querySelectorAll('a[href^="https://wa.me/"]').forEach(link => {
+        link.addEventListener('click', function() {
+            console.log('💬 WhatsApp clicked');
+        });
+    });
+
+    console.log('🩺 Dr. Khushboo Singh Website Loaded!');
+    console.log('⭐ Rating: 4.9 (298 Reviews)');
+    console.log('📞 Contact: +91 9999999999');
+</script>
+
+</body>
+</html>
